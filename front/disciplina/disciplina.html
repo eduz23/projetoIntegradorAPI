@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="disciplina.css">
+
+    <title>Página de disciplinas</title>
+</head>
+<body>
+    <button id="btn">Carregar disciplinas</button>
+
+    <h4>Nova disciplina</h4>
+
+    <div class="form">
+        <input type="text" id="campoID" placeholder="Digite o id do professor">
+        <input type="text" id="campoDisciplina" placeholder="Nome da disciplina">
+        <button id="btnSalvar">Salvar</button>
+        <button id="btnFechar">Fechar</button>
+    </div>
+
+    <h3>Lista de disciplinas</h3>
+
+    <div id="listagem" class="container"></div>
+    <div id="lista_alterar">
+        <h3>Alterar disciplina</h3>
+        <p>Id do professor</p>
+        <input type="text" id="editProf">
+
+        <p>Nome da disciplina</p>
+        <input type="text" id="editDisciplina">
+        
+        <button id="btn-alterar">Salvar</button>
+        <button id="fechar-janela">Fechar</button>
+    </div>
+
+    </div>
+
+    <script src="disciplinaFront.js"></script>
+</body>
+</html>

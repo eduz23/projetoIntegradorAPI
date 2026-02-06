@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(
+        135deg,
+        #fff8bd,
+        #fff047,
+        #fff58a
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.login-card {
+    background-color: #ffffff;
+    padding: 100px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.logo h1 {
+    font-size: 50px;
+    color: #334155;
+}
+
+.logo span {
+    color: #d6c800; 
+}
+
+h2 {
+    color: #1e293b;
+    margin-bottom: 35px;
+    font-size: 32px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 16px 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #3b82f6;
+}
+
+.btn-entrar {
+    width: 100%;
+    padding: 16px;
+    background: #d6c800;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-entrar:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-entrar:active {
+    transform: translateY(0);
+}

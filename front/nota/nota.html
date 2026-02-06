@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="nota.css">
+    <title>Página de notas</title>
+</head>
+
+<body>
+    <button id="btn">Caregar notas</button>
+
+    <h4>Nova nota</h4>
+
+    <div id="form">
+        <input type="text" id="alunoID" placeholder="Digite o id do aluno">
+        <input type="text" id="disciplinaID" placeholder="Digite o id da disciplina">
+        <input type="text" id="nota" placeholder="Digite a nota">
+        <button id="btnSalvar">Salvar</button>
+        <button id="btnFechar">Fechar</button>
+    </div>
+
+    <h3>Lista de notas</h3>
+
+    <div id="lista" class="container"></div>
+    <div id="lista_alterar">
+        <h3>Alterar nota</h3>
+        <p>Id do aluno</p>
+        <input type="text" id="editAluno">
+
+        <p>Id da disciplina</p>
+        <input type="text" id="editDisciplina">
+
+        <p>Nota</p>
+        <input type="text" id="editNota">
+
+        <button id="btn-alterar">Salvar</button>
+        <button id="fechar-janela">Fechar</button>
+    </div>
+
+
+    <script src="notaFront.js"></script>
+</body>
+
+</html>

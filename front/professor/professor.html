@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="professor.css">
+    <title>Pagina de professores</title>
+</head>
+
+<body>
+    <button id="btn">Carregar professores</button>
+
+    <h4>Novo professor</h4>
+
+    <div class="form">
+        <input type="text" id="campoNome" placeholder="Nome do professor">
+        <input type="text" id="campoDisciplina" placeholder="Nome da disciplina">
+        <input type="text" id="campoTelefone" placeholder="Número de telefone">
+        <button id="btnSalvar">Salvar</button>
+        <button id="btnFechar">Fechar</button>
+    </div>
+
+    <h3>Lista de professores</h3>
+
+    <div id="lista" class="container"> </div>
+    <div id="lista_alterar">
+        <h3>Alterar professor</h3>
+        <p>Nome do professor</p>
+        <input type="text" id="editNome">
+
+        <p>Nome da disciplina</p>
+        <input type="text" id="editDisciplina">
+
+        <p>Telefone do professor</p>
+        <input type="text" id="editTelefone">
+
+        <button id="btn-alterar">Salvar</button>
+        <button id="fechar-janela">Fechar</button>
+    </div>
+
+    </div>
+
+    <script src="professorFront.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="aluno.css">
+    <title>Página de alunos</title>
+</head>
+
+<body>
+    <button id="btn">Carregar alunos</button>
+
+    <h4>Novo aluno</h4>
+
+    <div class="form">
+        <input type="text" id="campoNome" placeholder="Nome do aluno">
+        <input type="text" id="campoIdade" placeholder="Idade do aluno">
+        <input type="text" id="campoCPF" placeholder="CPF do aluno">
+        <button id="btnSalvar">Salvar</button>
+    </div>
+
+    <h3>Lista de alunos</h3>
+    <div id="listagem" class="container"></div>
+    <div id="lista_alterar">
+        <h3>Alterar aluno</h3>
+        <p>Nome do aluno</p>
+        <input type="text" id="editNome">
+
+        <p>Idade do aluno</p>
+        <input type="text" id="editIdade">
+
+        <p>CPF do aluno</p>
+        <input type="text" id="editCPF">
+        
+        <button id="btn-alterar">Salvar</button>
+        <button id="fechar-janela">Fechar</button>
+    </div>
+
+    </div>
+
+    <script src="alunoFront.js"></script>
+</body>
+
+</html>
