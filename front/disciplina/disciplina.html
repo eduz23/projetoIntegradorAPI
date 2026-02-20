@@ -1,41 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="disciplina.css">
-
-    <title>Página de disciplinas</title>
+    <title>EduGrade - Gestão de Disciplinas</title>
 </head>
+
 <body>
-    <button id="btn">Carregar disciplinas</button>
+    <div class="header-actions">
+        <a href="../home/home.html" class="btn-voltar">← Voltar</a>
+        <button id="btn">Carregar disciplinas</button>
+    </div>
 
     <h4>Nova disciplina</h4>
-
     <div class="form">
-        <input type="text" id="campoID" placeholder="Digite o id do professor">
-        <input type="text" id="campoDisciplina" placeholder="Nome da disciplina">
-        <button id="btnSalvar">Salvar</button>
-        <button id="btnFechar">Fechar</button>
+
+        <select id="campoID">
+            <option value="">Selecione o professor</option>
+        </select>
+
+        <input type="text" id="campoDisciplina" placeholder="Nome da Disciplina">
+        <div style="display: flex; gap: 10px;">
+            <button id="btnSalvar" style="flex: 2;">Salvar</button>
+        </div>
     </div>
 
-    <h3>Lista de disciplinas</h3>
+    <div class="search-box">
+        <input type="text" id="buscar" placeholder="🔍 Buscar disciplina...">
+    </div>
 
-    <div id="listagem" class="container"></div>
+    <h3>Lista de Disciplinas</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Prof.</th>
+                    <th>Disciplina</th>
+                    <th style="text-align: center;">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+            </tbody>
+        </table>
+    </div>
+
     <div id="lista_alterar">
-        <h3>Alterar disciplina</h3>
-        <p>Id do professor</p>
-        <input type="text" id="editProf">
+        <h3>Alterar Disciplina</h3>
 
-        <p>Nome da disciplina</p>
+        <p>Professor</p>
+        <select id="editProf"></select>
+
+        <p>Nome da Disciplina</p>
         <input type="text" id="editDisciplina">
-        
-        <button id="btn-alterar">Salvar</button>
-        <button id="fechar-janela">Fechar</button>
-    </div>
 
+        <button id="btn-alterar">Salvar Alterações</button>
+        <button id="fechar-janela">Cancelar</button>
     </div>
 
     <script src="disciplinaFront.js"></script>
 </body>
+
 </html>

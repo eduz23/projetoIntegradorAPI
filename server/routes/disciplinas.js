@@ -4,29 +4,37 @@ const pool = require("../db");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    try {
-        let { id_professor, nome } = req.query;
+  try {
+    let { id_professor, nome } = req.query;
 
-        id_professor = id_professor || null
-        nome = nome ? `%${nome}%` : "%";
+    id_professor = id_professor || null;
+    nome = nome ? `%${nome}%` : "%";
 
-        const query = `
-      SELECT *
+    const query = `
+      SELECT 
+        disciplinas.id,
+        disciplinas.nome,
+        disciplinas.id_professor,
+        professores.nome AS professor
       FROM disciplinas
-      WHERE nome ILIKE $1 
-      AND ($2::int IS NULL OR id_professor = $2)
-      ORDER BY id
+      JOIN professores 
+        ON disciplinas.id_professor = professores.id
+      WHERE disciplinas.nome ILIKE $1 
+      AND ($2::int IS NULL OR disciplinas.id_professor = $2)
+      ORDER BY disciplinas.id
     `;
 
-        const result = await pool.query(query, [nome, id_professor]);
-        res.json(result.rows);
-    } catch (err) {
-        res.status(500).json({
-            error: "Erro ao buscar disciplinas",
-            detalhes: err.message
-        });
-    }
+    const result = await pool.query(query, [nome, id_professor]);
+    res.json(result.rows);
+
+  } catch (err) {
+    res.status(500).json({
+      error: "Erro ao buscar disciplinas",
+      detalhes: err.message
+    });
+  }
 });
+
 
 router.get("/:id", async (req, res) => {
   try {

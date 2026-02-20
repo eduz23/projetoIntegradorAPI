@@ -6,12 +6,7 @@
 }
 
 body {
-    background: linear-gradient(
-        135deg,
-        #fff8bd,
-        #fff047,
-        #fff58a
-    );
+    background: radial-gradient(circle, #fff982 0%, #f7d34a 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,11 +34,12 @@ body {
 
 .logo h1 {
     font-size: 50px;
-    color: #334155;
+    color: #000000;
 }
 
 .logo span {
-    color: #d6c800; 
+    color: #ffcf33;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 h2 {
@@ -73,7 +69,7 @@ input:focus {
 .btn-entrar {
     width: 100%;
     padding: 16px;
-    background: #d6c800;
+    background: #ffd95a;
     color: white;
     border: none;
     border-radius: 8px;

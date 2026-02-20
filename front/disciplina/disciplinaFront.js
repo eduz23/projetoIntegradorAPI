@@ -1,60 +1,92 @@
 const API = "http://127.0.0.1:3000/disciplinas";
+const API_PROFESSORES = "http://127.0.0.1:3000/professores";
 
-const lista = document.getElementById('listagem');
-const btnCarregar = document.getElementById('btn');
-const btnSalvar = document.getElementById('btnSalvar');
-const btnAlterar = document.getElementById('btn-alterar');
-const fechar = document.getElementById('fechar-janela');
-const alterar = document.getElementById('lista_alterar')
-
-btnCarregar.addEventListener("click", carregarDisciplinas)
-btnSalvar.addEventListener("click", postDisciplina)
-btnAlterar.addEventListener("click", () => {
-    alterarDisciplina(idEditar);
-});
+const corpoTabela = document.getElementById("corpo-tabela");
+const btnCarregar = document.getElementById("btn");
+const btnSalvar = document.getElementById("btnSalvar");
+const btnAlterar = document.getElementById("btn-alterar");
+const fechar = document.getElementById("fechar-janela");
+const alterar = document.getElementById("lista_alterar");
+const inputBuscar = document.getElementById("buscar");
+const selectProfessor = document.getElementById("campoID");
+const selectEditProfessor = document.getElementById("editProf");
 
 let idEditar = null;
 
+btnCarregar.addEventListener("click", carregarDisciplinas);
+btnSalvar.addEventListener("click", postDisciplina);
+btnAlterar.addEventListener("click", () => alterarDisciplina(idEditar));
+
 fechar.addEventListener("click", () => {
-  alterar.style.display = "none";
-  lista.style.pointerEvents = "auto";
+    alterar.style.display = "none";
 });
 
-function criarCard(m) {
-    const card = document.createElement("div")
-    card.classList.add("card")
+document.addEventListener("DOMContentLoaded", () => {
+    carregarProfessores();
+});
 
-    card.innerHTML = `
-    <h3>${m.id_professor}, ${m.nome}</h3>
+async function carregarProfessores() {
+    try {
+        const resposta = await fetch(API_PROFESSORES);
+        const professores = await resposta.json();
 
-    <button class="btn-alterar" onclick="alterarJanela(${m.id})">Alterar</button>
-    <button class="btn-delete" onclick="deletar(${m.id})">Deletar</button>
-    
+        selectProfessor.innerHTML = '<option value="">Selecione o professor</option>';
+        selectEditProfessor.innerHTML = '<option value="">Selecione o professor</option>';
+
+        professores.forEach((prof) => {
+            const option1 = document.createElement("option");
+            option1.value = prof.id;
+            option1.textContent = prof.nome;
+
+            const option2 = option1.cloneNode(true);
+
+            selectProfessor.appendChild(option1);
+            selectEditProfessor.appendChild(option2);
+        });
+
+    } catch (erro) {
+        console.error("Erro ao carregar professores:", erro.message);
+    }
+}   
+
+function criarLinha(m) {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+        <td>${m.professor}</td>
+        <td>${m.nome}</td>
+        <td class="acoes">
+            <button class="btn-alterar" onclick="alterarJanela(${m.id})">Editar</button>
+            <button class="btn-delete" onclick="deletar(${m.id})">Excluir</button>
+        </td>
     `;
 
-    lista.appendChild(card);
+    corpoTabela.appendChild(tr);
 }
 
 async function carregarDisciplinas() {
     try {
-        const resposta = await fetch(`${API}`)
-
+        const resposta = await fetch(API);
         const dados = await resposta.json();
 
-        lista.innerHTML = '';
+        corpoTabela.innerHTML = '';
+        dados.forEach((m) => criarLinha(m));
 
-        dados.forEach((m) => criarCard(m));
-    }
-    catch (erro) {
-        console.error(erro.message)
+    } catch (erro) {
+        console.error("Erro ao carregar:", erro.message);
     }
 }
 
 async function postDisciplina() {
-    let nome = document.getElementById("campoDisciplina").value;
-    let id_professor = document.getElementById("campoID").value;
+    const nome = document.getElementById("campoDisciplina").value;
+    const id_professor = selectProfessor.value;
 
-    const novaDisciplina = { id_professor, nome }
+    if (!id_professor || !nome) {
+        alert("Preencha todos os campos!");
+        return;
+    }
+
+    const novaDisciplina = { id_professor, nome };
 
     try {
         const resposta = await fetch(API, {
@@ -63,31 +95,55 @@ async function postDisciplina() {
             body: JSON.stringify(novaDisciplina)
         });
 
-        if (!resposta.ok) {
-            throw new Error('Erro ao inserir')
+        if (resposta.ok) {
+            document.getElementById("campoDisciplina").value = "";
+            selectProfessor.value = "";
+            carregarDisciplinas();
         }
-        carregarDisciplinas();
-    }
-    catch (erro) {
-        console.error(erro.message)
+
+    } catch (erro) {
+        console.error(erro.message);
     }
 }
 
 async function deletar(id) {
+    if (!confirm("Tem certeza que deseja excluir esta disciplina?")) return;
+
     try {
-        const resposta = await fetch(`${API}/${id}`, {
-            method: "DELETE"
-        });
-        carregarDisciplinas();
+        const resposta = await fetch(`${API}/${id}`, { method: "DELETE" });
+
+        if (resposta.ok) {
+            alert("Disciplina excluída com sucesso!");
+            carregarDisciplinas();
+        } else {
+            alert("Erro ao excluir.");
+        }
+
+    } catch (erro) {
+        console.error("Erro:", erro.message);
     }
-    catch (erro) {
-        console.erro(erro.message)
+}
+
+async function alterarJanela(id) {
+    idEditar = id;
+
+    try {
+        const resposta = await fetch(`${API}/${id}`);
+        const disciplina = await resposta.json();
+
+        selectEditProfessor.value = disciplina.id_professor;
+        document.getElementById("editDisciplina").value = disciplina.nome;
+
+        alterar.style.display = "block";
+
+    } catch (err) {
+        alert("Erro ao buscar dados.");
     }
 }
 
 async function alterarDisciplina(id) {
-    let nome = document.getElementById("editDisciplina").value;
-    let id_professor = document.getElementById("editProf").value;
+    const nome = document.getElementById("editDisciplina").value;
+    const id_professor = document.getElementById("editProf").value;
 
     const disciplinaAtualizada = { id_professor, nome };
 
@@ -99,21 +155,28 @@ async function alterarDisciplina(id) {
         });
 
         alterar.style.display = "none";
-        lista.style.pointerEvents = "auto";
         carregarDisciplinas();
+
     } catch (err) {
         console.error(err.message);
     }
-};
+}
 
-async function alterarJanela(id) {
-    alterar.style.display = "block";
-    lista.style.pointerEvents = "none";
-    idEditar = id;
+inputBuscar.addEventListener("keyup", function () {
+    const filtro = inputBuscar.value.toLowerCase();
+    const linhas = corpoTabela.getElementsByTagName("tr");
 
-    const resposta = await fetch(`${API}/${id}`);
-    const disciplina = await resposta.json();
+    for (let i = 0; i < linhas.length; i++) {
+        const colunaNome = linhas[i].getElementsByTagName("td")[1];
 
-    document.getElementById("editProf").value = disciplina.id_professor;
-    document.getElementById("editDisciplina").value = disciplina.nome;
-};
+        if (colunaNome) {
+            const nome = colunaNome.innerText.toLowerCase();
+
+            if (nome.includes(filtro)) {
+                linhas[i].style.display = "";
+            } else {
+                linhas[i].style.display = "none";
+            }
+        }
+    }
+});

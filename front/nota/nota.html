@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="nota.css">
-    <title>Página de notas</title>
+    <title>EduGrade - Gestão de Notas</title>
 </head>
-
 <body>
-    <button id="btn">Caregar notas</button>
-
-    <h4>Nova nota</h4>
-
-    <div id="form">
-        <input type="text" id="alunoID" placeholder="Digite o id do aluno">
-        <input type="text" id="disciplinaID" placeholder="Digite o id da disciplina">
-        <input type="text" id="nota" placeholder="Digite a nota">
-        <button id="btnSalvar">Salvar</button>
-        <button id="btnFechar">Fechar</button>
+    <div class="header-actions">
+        <a href="../home/home.html" class="btn-voltar">← Voltar</a>
+        <button id="btn">Carregar Notas</button>
     </div>
 
-    <h3>Lista de notas</h3>
+    <h4>Nova Nota</h4>
+    <div class="form">
+        <select id="alunoID"></select>
+        <select id="disciplinaID"></select>
+        <input type="text" id="nota" placeholder="Nota">
+        <button id="btnSalvar">Salvar Nota</button>
+    </div>
 
-    <div id="lista" class="container"></div>
+    <h3>Lista de Notas</h3>
+
+    <div class="search-box">
+        <input type="text" id="buscar" placeholder="🔍 Buscar aluno...">
+    </div>
+
+    <div class="table-container">
+        <table id="listagem">
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>Disciplina</th>
+                    <th>Nota</th>
+                    <th style="text-align: center;">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela"></tbody>
+        </table>
+    </div>
+
     <div id="lista_alterar">
-        <h3>Alterar nota</h3>
-        <p>Id do aluno</p>
-        <input type="text" id="editAluno">
-
-        <p>Id da disciplina</p>
-        <input type="text" id="editDisciplina">
-
+        <h3>Alterar Nota</h3>
+        <p>Aluno</p>
+        <select id="editAluno"></select>
+        <p>Disciplina</p>
+        <select id="editDisciplina"></select>
         <p>Nota</p>
-        <input type="text" id="editNota">
-
-        <button id="btn-alterar">Salvar</button>
+        <input type="number" id="editNota">
+        <button id="btn-alterar">Salvar Alterações</button>
         <button id="fechar-janela">Fechar</button>
     </div>
 
-
     <script src="notaFront.js"></script>
 </body>
-
 </html>

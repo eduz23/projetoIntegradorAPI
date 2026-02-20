@@ -1,53 +1,42 @@
 const API = "http://127.0.0.1:3000/professores";
 
-const lista = document.getElementById('lista');
+const corpoTabela = document.getElementById("corpo-tabela");
 const btnCarregar = document.getElementById('btn');
 const btnSalvar = document.getElementById('btnSalvar');
 const btnAlterar = document.getElementById('btn-alterar');
 const alterar = document.getElementById("lista_alterar");
-const fechar = document.getElementById('fechar-janela')
-
-btnCarregar.addEventListener("click", carregarProfessores)
-btnSalvar.addEventListener("click", postProfessor)
-btnAlterar.addEventListener("click", () =>{
-    alterarProfessor(idEditar)
-})
+const fechar = document.getElementById('fechar-janela');
+const inputBuscar = document.getElementById("buscar");
 
 let idEditar = null;
 
-fechar.addEventListener("click", () => {
-  alterar.style.display = "none";
-  lista.style.pointerEvents = "auto";
-});
+btnCarregar.addEventListener("click", carregarProfessores);
+btnSalvar.addEventListener("click", postProfessor);
+btnAlterar.addEventListener("click", () => alterarProfessor(idEditar));
+fechar.addEventListener("click", () => { alterar.style.display = "none"; });
 
-
-function criarCard(m) {
-    const card = document.createElement("div")
-    card.classList.add("card")
-
-    card.innerHTML = `
-    <h3>${m.nome} (${m.disciplina}), ${m.telefone}</h3>
-    
-    <button class="btn-alterar" onclick="alterarJanela(${m.id})">Alterar</button>
-    <button class="btn-delete" onclick="deletar(${m.id})">Deletar</button>
-    
-    `;  
-
-    lista.appendChild(card);
+function criarLinha(m) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+        <td>${m.nome}</td>
+        <td>${m.disciplina}</td>
+        <td>${m.telefone}</td>
+        <td class="acoes">
+            <button class="btn-alterar" onclick="alterarJanela(${m.id})">Editar</button>
+            <button class="btn-delete" onclick="deletar(${m.id})">Excluir</button>
+        </td>
+    `;
+    corpoTabela.appendChild(tr);
 }
 
 async function carregarProfessores() {
     try {
-        const resposta = await fetch(`${API}`)
-
+        const resposta = await fetch(API);
         const dados = await resposta.json();
-
-        lista.innerHTML = '';
-
-        dados.forEach((m) => criarCard(m));
-    }
-    catch (erro) {
-        console.error(erro.message)
+        corpoTabela.innerHTML = '';
+        dados.forEach(m => criarLinha(m));
+    } catch (erro) {
+        console.error("Erro ao carregar:", erro.message);
     }
 }
 
@@ -56,37 +45,51 @@ async function postProfessor() {
     const disciplina = document.getElementById("campoDisciplina").value;
     const telefone = document.getElementById("campoTelefone").value;
 
-    const novoProf = { nome, disciplina, telefone };
-
     try {
         const resposta = await fetch(API, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(novoProf)
+            body: JSON.stringify({ nome, disciplina, telefone })
         });
 
-        if (!resposta.ok) {
-            throw new Error('Erro ao inserir');
+        if (resposta.ok) {
+            carregarProfessores();
+            // Limpa os campos após salvar
+            document.getElementById("campoNome").value = "";
+            document.getElementById("campoDisciplina").value = "";
+            document.getElementById("campoTelefone").value = "";
         }
-
-        carregarProfessores();
-    }
-    catch (erro) {
-        console.error(erro.message)
-    }
-};
-
-async function deletar(id) {
-    try {
-        const resposta = await fetch(`${API}/${id}`, {
-            method: "DELETE"
-        });
-        carregarProfessores();
-    }
-    catch (erro) {
+    } catch (erro) {
         console.error(erro.message);
     }
-};
+}
+
+async function deletar(id) {
+    if(!confirm("Deseja realmente excluir este professor?")) return;
+    try {
+        await fetch(`${API}/${id}`, { method: "DELETE" });
+        carregarProfessores();
+    } catch (erro) {
+        console.error(erro.message);
+    }
+}
+
+async function alterarJanela(id) {
+    idEditar = id;
+    try {
+        const resposta = await fetch(`${API}/${id}`);
+        const prof = await resposta.json();
+
+        // Preenche o modal com os dados atuais
+        document.getElementById("editNome").value = prof.nome;
+        document.getElementById("editDisciplina").value = prof.disciplina;
+        document.getElementById("editTelefone").value = prof.telefone;
+
+        alterar.style.display = "block";
+    } catch (err) {
+        console.error(err.message);
+    }
+}
 
 async function alterarProfessor(id) {
     const nome = document.getElementById("editNome").value;
@@ -94,29 +97,37 @@ async function alterarProfessor(id) {
     const telefone = document.getElementById("editTelefone").value;
 
     try {
-        await fetch(`${API}/${id}`, {
+        const res = await fetch(`${API}/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nome, disciplina, telefone }),
         });
 
-        alterar.style.display = "none";
-        lista.style.pointerEvents = "auto";
-        carregarProfessores();
+        if(res.ok) {
+            alterar.style.display = "none";
+            carregarProfessores();
+        }
     } catch (err) {
         console.error(err.message);
     }
-};
+}
 
-async function alterarJanela(id) {
-    alterar.style.display = "block";
-    lista.style.pointerEvents = "none";
-    idEditar = id;
+inputBuscar.addEventListener("keyup", function () {
+    const filtro = inputBuscar.value.toLowerCase();
+    const linhas = corpoTabela.getElementsByTagName("tr");
 
-    const resposta = await fetch(`${API}/${id}`);
-    const professor = await resposta.json();
+    for (let i = 0; i < linhas.length; i++) {
+        
+        const colunaNome = linhas[i].getElementsByTagName("td")[0];
 
-    document.getElementById("editNome").value = professor.nome;
-    document.getElementById("editDisciplina").value = professor.disciplina;
-    document.getElementById("editTelefone").value = professor.telefone;
-};
+        if (colunaNome) {
+            const nome = colunaNome.innerText.toLowerCase();
+
+            if (nome.includes(filtro)) {
+                linhas[i].style.display = "";
+            } else {
+                linhas[i].style.display = "none";
+            }
+        }
+    }
+});

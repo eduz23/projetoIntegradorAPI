@@ -2,110 +2,208 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Segoe UI", Roboto, sans-serif;
 }
 
 body {
-    background-color: #f4f6f8;
-    padding: 20px;
+    background: radial-gradient(circle, #fdf081 0%, #f7d358 100%);
+    min-height: 100vh;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Botões */
+
+.header-actions {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;     
+    margin-bottom: 30px;
+    height: 50px;          
+}
+
+.btn-voltar {
+    position: absolute;     
+    left: 0;                 
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: #333;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 11px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.btn-voltar:hover {
+    background-color: #333;
+    color: #fff;
+    transform: translateX(-5px);
+}
+
+#btn { 
+    background: #333; 
+    color: white;
+    margin-bottom: 0;
+}
+.btn-voltar:hover {
+    background-color: #333;
+    color: #fff;
+    transform: translateX(-5px);
+}
+
 button {
-    padding: 8px 14px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+    transition: 0.3s;
 }
 
-#btn {
-    background-color: #4f46e5;
-    color: white;
-    margin-bottom: 20px;
+button:hover {
+    filter: brightness(0.9);
+    transform: translateY(-1px);
 }
 
-#btnSalvar {
-    background-color: #16a34a;
-    color: white;
+#btn { 
+    background: #333; 
+    color: white; 
 }
 
-.btn-delete {
-    background-color: #dc2626;
-    color: white;
+
+h4 {
+    margin-bottom: 15px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.btn-alterar {
-    background-color: #f59e0b;
-    color: white;
-}
-
-/* Formulário */
 .form {
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 400px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
 .form input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    background: #fdfdfd;
 }
 
-/* Lista de alunos */
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
+#btnSalvar { 
+    background: #f7d358; 
+    color: #333; 
+    width: 100%; 
+    border: 1px solid #e2bc3d; 
 }
 
-/* Card do aluno */
-.card {
-    background-color: white;
+
+h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.table-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 900px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-bottom: 2px solid #f2f2f2;
+    color: #999;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 
-.card h3 {
-    margin-bottom: 10px;
-    font-size: 16px;
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #444;
 }
 
-.card button {
-    margin-right: 5px;
-    margin-top: 5px;
+tr:hover { 
+    background-color: #fffef0; 
 }
 
-/* Janela de alterar */
+.acoes { 
+    text-align: center; 
+}
+
+.btn-delete { 
+    background: #ff4c4c; 
+    color: white; 
+}
+
 #lista_alterar {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    width: 300px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.3);
+    width: 350px;
+    z-index: 100;
 }
 
 #lista_alterar input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
 }
 
-#fechar-janela {
-    background-color: #6b7280;
-    color: white;
+#btn-alterar { 
+    background: #f7d358; 
+    width: 100%; 
+    margin-bottom: 10px; 
+}
+
+#fechar-janela { 
+    background: #eee; 
+    color: #666; 
+    width: 100%; 
+}
+
+.search-box {
+    margin-bottom: 15px;
+}
+
+#buscar {
+    padding: 8px;
+    width: 250px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }

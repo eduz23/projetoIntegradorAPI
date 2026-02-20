@@ -1,51 +1,47 @@
 const API = "http://127.0.0.1:3000/alunos";
 
-const lista = document.getElementById("listagem");
+// Selecionamos o corpo da tabela em vez da div
+const corpoTabela = document.getElementById("corpo-tabela");
 const btnCarregar = document.getElementById("btn");
 const btnSalvar = document.getElementById("btnSalvar");
-const alterar = document.getElementById('lista_alterar')
-const btnAlterar = document.getElementById("btn-alterar")
-const fechar = document.getElementById('fechar-janela')
-
-btnCarregar.addEventListener("click", carregarAlunos)
-btnSalvar.addEventListener("click", postAluno)
-btnAlterar.addEventListener("click", () => {
-    alterarAluno(idEditar);
-});
+const alterar = document.getElementById('lista_alterar');
+const btnAlterar = document.getElementById("btn-alterar");
+const fechar = document.getElementById('fechar-janela');
+const inputBuscar = document.getElementById("buscar");
 
 let idEditar = null;
 
+btnCarregar.addEventListener("click", carregarAlunos);
+btnSalvar.addEventListener("click", postAluno);
+btnAlterar.addEventListener("click", () => alterarAluno(idEditar));
 fechar.addEventListener("click", () => {
-  alterar.style.display = "none";
-  lista.style.pointerEvents = "auto";
+    alterar.style.display = "none";
 });
 
-function criarCard(m) {
-    const card = document.createElement("div")
-    card.classList.add("card")
+// Mudamos a lógica para criar uma linha (tr)
+function criarLinha(m) {
+    const tr = document.createElement("tr");
 
-    card.innerHTML = `
-    <h3>${m.nome} (${m.idade}), ${m.cpf}</h3>
-    <button class="btn-alterar" onclick="alterarJanela(${m.id})">Alterar</button>
-    <button class="btn-delete" onclick="deletar(${m.id})">Deletar</button>
-    
+    tr.innerHTML = `
+        <td>${m.nome}</td>
+        <td>${m.idade}</td>
+        <td>${m.cpf}</td>
+        <td class="acoes">
+            <button class="btn-alterar" onclick="alterarJanela(${m.id})">Editar</button>
+            <button type="button" class="btn-delete" onclick="deletar(${m.id})">Excluir</button>
+        </td>
     `;
-
-    lista.appendChild(card);
-};
+    corpoTabela.appendChild(tr);
+}
 
 async function carregarAlunos() {
     try {
-        const resposta = await fetch(`${API}`);
-
+        const resposta = await fetch(API);
         const dados = await resposta.json();
-
-        lista.innerHTML = '';
-
-        dados.forEach((m) => criarCard(m));
-    }
-    catch (erro) {
-        console.error(erro.message);
+        corpoTabela.innerHTML = ''; // Limpa o corpo da tabela
+        dados.forEach((m) => criarLinha(m));
+    } catch (erro) {
+        console.error("Erro ao carregar:", erro.message);
     }
 };
 
@@ -75,14 +71,46 @@ async function postAluno() {
 };
 
 async function deletar(id) {
+    if (!confirm("Tem certeza que deseja excluir este aluno?")) return;
+
     try {
         const resposta = await fetch(`${API}/${id}`, {
             method: "DELETE"
         });
-        carregarAlunos();
+
+        if (!resposta.ok) throw new Error();
+
+        alert("Aluno deletado com sucesso!");
+
+        await carregarAlunos(); // espera terminar
+
+    } catch (erro) {
+        alert("Erro ao deletar aluno!");
     }
-    catch (erro) {
-        console.error(erro.message);
+}
+
+
+async function alterarJanela(id) {
+    alterar.style.display = "block";
+    idEditar = id; 
+
+    try {
+
+        const resposta = await fetch(`${API}/${id}`);
+        
+        if (!resposta.ok) {
+            throw new Error("Não foi possível recuperar os dados do aluno.");
+        }
+        const aluno = await resposta.json();
+
+        document.getElementById("editNome").value = aluno.nome;
+        document.getElementById("editIdade").value = aluno.idade;
+        document.getElementById("editCPF").value = aluno.cpf;
+
+    } catch (erro) {
+        console.error("Erro ao buscar aluno:", erro.message);
+        alert("Erro ao carregar dados do aluno.");
+        alterar.style.display = "none"; 
     }
 };
 
@@ -94,29 +122,37 @@ async function alterarAluno(id) {
     const alunoAtualizado = { nome, idade, cpf };
 
     try {
-        await fetch(`${API}/${id}`, {
+        const resposta = await fetch(`${API}/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(alunoAtualizado),
         });
 
-        alterar.style.display = "none";
-        lista.style.pointerEvents = "auto";
-        carregarAlunos();
+        if (resposta.ok) {
+            alterar.style.display = "none";
+            carregarAlunos();
+        }
     } catch (err) {
-        console.error(err.message);
+        console.error("Erro ao atualizar:", err.message);
     }
 };
 
-async function alterarJanela(id) {
-    alterar.style.display = "block";
-    lista.style.pointerEvents = "none";
-    idEditar = id;
+inputBuscar.addEventListener("keyup", function () {
+    const filtro = inputBuscar.value.toLowerCase();
+    const linhas = corpoTabela.getElementsByTagName("tr");
 
-    const resposta = await fetch(`${API}/${id}`);
-    const aluno = await resposta.json();
+    for (let i = 0; i < linhas.length; i++) {
+        
+        const colunaNome = linhas[i].getElementsByTagName("td")[0];
 
-    document.getElementById("editNome").value = aluno.nome;
-    document.getElementById("editIdade").value = aluno.idade;
-    document.getElementById("editCPF").value = aluno.cpf;
-};
+        if (colunaNome) {
+            const nome = colunaNome.innerText.toLowerCase();
+
+            if (nome.includes(filtro)) {
+                linhas[i].style.display = "";
+            } else {
+                linhas[i].style.display = "none";
+            }
+        }
+    }
+});

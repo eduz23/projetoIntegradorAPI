@@ -5,40 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="professor.css">
-    <title>Pagina de professores</title>
+    <title>EduGrade - Gestão de Professores</title>
 </head>
 
 <body>
-    <button id="btn">Carregar professores</button>
+    <div class="header-actions">
+        <a href="../home/home.html" class="btn-voltar">← Voltar</a>
+        <button id="btn">Carregar professores</button>
+    </div>
 
     <h4>Novo professor</h4>
-
     <div class="form">
         <input type="text" id="campoNome" placeholder="Nome do professor">
-        <input type="text" id="campoDisciplina" placeholder="Nome da disciplina">
-        <input type="text" id="campoTelefone" placeholder="Número de telefone">
-        <button id="btnSalvar">Salvar</button>
-        <button id="btnFechar">Fechar</button>
+        <input type="text" id="campoDisciplina" placeholder="Disciplina">
+        <input type="text" id="campoTelefone" placeholder="Telefone">
+        <button id="btnSalvar">Salvar Professor</button>
     </div>
 
-    <h3>Lista de professores</h3>
+    <h3>Lista de Professores</h3>
 
-    <div id="lista" class="container"> </div>
+    <div class="search-box">
+        <input type="text" id="buscar" placeholder="🔍 Buscar professor...">
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Disciplina</th>
+                    <th>Telefone</th>
+                    <th style="text-align: center;">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+            </tbody>
+        </table>
+    </div>
+
     <div id="lista_alterar">
-        <h3>Alterar professor</h3>
-        <p>Nome do professor</p>
+        <h3>Alterar Professor</h3>
+        <p>Nome</p>
         <input type="text" id="editNome">
-
-        <p>Nome da disciplina</p>
+        <p>Disciplina</p>
         <input type="text" id="editDisciplina">
-
-        <p>Telefone do professor</p>
+        <p>Telefone</p>
         <input type="text" id="editTelefone">
 
-        <button id="btn-alterar">Salvar</button>
-        <button id="fechar-janela">Fechar</button>
-    </div>
-
+        <button id="btn-alterar">Salvar Alterações</button>
+        <button id="fechar-janela">Cancelar</button>
     </div>
 
     <script src="professorFront.js"></script>

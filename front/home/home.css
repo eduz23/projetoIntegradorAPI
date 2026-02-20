@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle, #fff982 0%, #f7d34a 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    width: 400px;
+    text-align: center;
+}
+
+.logo { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.logo h1 {
+    font-size: 50px;
+    color: #000000;
+}
+
+.logo span {
+    color: #ffcf33;
+}
+
+
+header h1 {
+    color: #333;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+header p {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menu-btn {
+    background-color: #ffd95a;
+    border-radius: 12px;
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.menu-btn:hover {
+    background-color: #ffcf33;
+    transform: scale(1.02);
+    /* Leve aumento ao passar o mouse */
+}
+
+/* Estilização dos ícones do Flaticon */
+.icon {
+    font-size: 22px;
+    /* Tamanho do ícone */
+    color: #333;
+    /* Cor do ícone */
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+}
+
+.text {
+    font-weight: 800;
+    /* Deixa a fonte mais "bold" como na imagem */
+    color: #333;
+    letter-spacing: 1px;
+    font-size: 15px;
+}

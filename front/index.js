@@ -20,11 +20,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     // Lógica de redirecionamento baseada no perfil retornado pela API
     if (data.perfil === "professor") { // No seu backend, 'adm' retorna perfil: 'professor'
-      window.location.href = "../front/professor/professor.html"; // Ajustado para o nome da pasta que você pediu
+      window.location.href = "../front/home/home.html"; // Ajustado para o nome da pasta que você pediu
     } else if (data.perfil === "aluno") {
       localStorage.setItem("alunoId", data.alunoId);
       localStorage.setItem("nomeUsuario", data.nome);
-      window.location.href = "../front/aluno/aluno.html"; // Ajustado para o nome da pasta que você pediu
+      window.location.href = "../front/alunoU/alunoU.html"; // Ajustado para o nome da pasta que você pediu
     }
   } catch (error) {
     console.error("Erro ao conectar com o servidor:", error);

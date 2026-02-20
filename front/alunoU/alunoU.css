@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle, #fff982 0%, #f7d34a 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-container {
+    text-align: center; /* Centraliza o título e o subtítulo */
+    margin-bottom: 30px;
+}
+
+.logo-container h2 {
+    font-size: 50px;
+    color: #000000;
+    margin: 0;
+}
+
+.logo-container span {
+    color: #ffcf33;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+#lista-materias {
+    width: 100%;
+    max-width: 650px; /* Aumentado de 500px para 650px para ser mais largo */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.materia-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.materia-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.materia-nome {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.avaliacoes-btn {
+    background: #f9f9f9;
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #666;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.avaliacoes-btn:hover {
+    background: #f0f0f0;
+}
+
+.notas-lista {
+    display: none;
+    background: #fff;
+    padding: 10px 20px;
+    border-top: 1px solid #eee;
+}
+
+.nota-linha {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.nota-linha:last-child { border: none; }
+
+.show { display: block; }
+
+.seta {
+    transition: transform 0.0s; 
+}
+
+.rotate { transform: rotate(180deg); }
