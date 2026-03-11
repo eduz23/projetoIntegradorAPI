@@ -1,4 +1,6 @@
-const API = "http://127.0.0.1:3000/alunos";
+const API = window.location.hostname === "localhost"
+  ? "http://127.0.0.1:3000/alunos"
+  : "https://projetointegradorapi-ks3p.onrender.com/alunos";
 
 // Selecionamos o corpo da tabela em vez da div
 const corpoTabela = document.getElementById("corpo-tabela");

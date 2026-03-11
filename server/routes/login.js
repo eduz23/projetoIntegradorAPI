@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../db");
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
+router.post("/", async (req, res) => {
   const { cpf, senha } = req.body;
 
   const result = await pool.query(
@@ -16,7 +16,6 @@ router.post("/login", async (req, res) => {
 
   const user = result.rows[0];
 
-  // 👨‍🎓 ALUNO
   if (user.perfil === "usuario") {
     const aluno = await pool.query(
       "SELECT id FROM alunos WHERE cpf = $1",
@@ -34,7 +33,6 @@ router.post("/login", async (req, res) => {
     });
   }
 
-  // 👨‍🏫 PROFESSOR / ADM
   if (user.perfil === "adm") {
     return res.json({
       perfil: "professor",
