@@ -42,12 +42,16 @@ router.post("/", async (req, res) => {
       });
     }
 
-    return res.status(403).json({ erro: "Perfil inválido" });
+    console.log(cpf, senha)
 
+    return res.status(403).json({ erro: "Perfil inválido" });
+    
   } catch (erro) {
     console.error("Erro no login:", erro);
     return res.status(500).json({ erro: "Erro interno do servidor" });
   }
+
+  
 });
 
 module.exports = router;
