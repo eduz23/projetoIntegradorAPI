@@ -1,6 +1,10 @@
-const API = "http://127.0.0.1:3000/notas";
-const API_ALUNOS = "http://127.0.0.1:3000/alunos";
-const API_DISCIPLINAS = "http://127.0.0.1:3000/disciplinas";
+const BASE_API = window.location.hostname === "localhost"
+  ? "http://127.0.0.1:3000"
+  : "https://projetointegradorapi-ks3p.onrender.com";
+
+const API = `${BASE_API}/notas`;
+const API_ALUNOS = `${BASE_API}/alunos`;
+const API_DISCIPLINAS = `${BASE_API}/disciplinas`;
 
 const corpoTabela = document.getElementById("corpo-tabela");
 const btnCarregar = document.getElementById("btn");
