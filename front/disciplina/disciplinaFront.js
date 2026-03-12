@@ -1,6 +1,6 @@
 const BASE_API = window.location.hostname === "localhost"
   ? "http://127.0.0.1:3000"
-  : "https://projetointegradorapi-ks3p.onrender.com";
+  : "https://projetointegradorapi-back.onrender.com/";
 
 const API = `${BASE_API}/disciplinas`;
 const API_PROFESSORES = `${BASE_API}/professores`;
