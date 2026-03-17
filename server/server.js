@@ -21,7 +21,7 @@ app.use("/professores", professoresRouter)
 app.use("/disciplinas", disciplinasRouter)
 app.use("/notas", notasRouter)
 app.use("/login", loginRouter)
-
+  
 // Rota raiz
 app.get("/", (req, res) => {
   res.send("🌎 API EduGrade rodando! Acesse a documentação em");
@@ -35,4 +35,4 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("✅ Servidor rodando em http://127.0.0.1:3000");
-})
+});
