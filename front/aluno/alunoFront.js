@@ -49,10 +49,10 @@ async function carregarAlunos() {
 
 async function postAluno() {
     const nome = document.getElementById("campoNome").value;
-    const cpf = document.getElementById("campoCPF").value;
     const idade = document.getElementById("campoIdade").value;
+    const cpf = document.getElementById("campoCPF").value;
 
-    const novoAluno = { nome, cpf, idade };
+    const novoAluno = { nome, idade, cpf };
 
     try {
         const resposta = await fetch(API, {
