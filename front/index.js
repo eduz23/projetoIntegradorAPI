@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       else if (data.perfil === "aluno") {
         localStorage.setItem("alunoId", data.alunoId);
         localStorage.setItem("nomeUsuario", data.nome);
-        window.location.href = "../front/alunoU/alunoU.html";
+        window.location.href = "/alunoU/alunoU.html";
       }
 
     } catch (error) {
