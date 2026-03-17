@@ -1,6 +1,6 @@
 const BASE_API = window.location.hostname === "localhost"
-  ? "http://127.0.0.1:3000"
-  : "https://projetointegradorapi-back.onrender.com";
+    ? "http://127.0.0.1:3000"
+    : "https://projetointegradorapi-back.onrender.com";
 
 const API = `${BASE_API}/disciplinas`;
 const API_PROFESSORES = `${BASE_API}/professores`;
@@ -51,7 +51,7 @@ async function carregarProfessores() {
     } catch (erro) {
         console.error("Erro ao carregar professores:", erro.message);
     }
-}   
+}
 
 function criarLinha(m) {
     const tr = document.createElement("tr");
@@ -83,7 +83,7 @@ async function carregarDisciplinas() {
 
 async function postDisciplina() {
     const nome = document.getElementById("campoDisciplina").value;
-    const id_professor = selectProfessor.value;
+    const id_professor = parseInt(selectProfessor.value);
 
     if (!id_professor || !nome) {
         alert("Preencha todos os campos!");
@@ -100,9 +100,9 @@ async function postDisciplina() {
         });
 
         if (resposta.ok) {
-            document.getElementById("campoDisciplina").value = "";
-            selectProfessor.value = "";
-            carregarDisciplinas();
+            const erro = await resposta.text();
+            console.error("ERRO DO BACKEND:", erro);
+            return;
         }
 
     } catch (erro) {
