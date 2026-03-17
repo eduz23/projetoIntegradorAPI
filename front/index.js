@@ -38,8 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Erro ao conectar com o servidor:", error);
       alert("Erro de conexão com o servidor.");
     }
-
-    console.log(cpf, senha)
   });
 
 });
