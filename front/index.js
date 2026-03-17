@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = text ? JSON.parse(text) : {};
 
       if (data.perfil === "professor") { 
-        window.location.href = "/home/home.html";
+        window.location.href = "home/home.html";
       } 
       else if (data.perfil === "aluno") {
         localStorage.setItem("alunoId", data.alunoId);
         localStorage.setItem("nomeUsuario", data.nome);
-        window.location.href = "/alunoU/alunoU.html";
+        window.location.href = "alunoU/alunoU.html";
       }
 
     } catch (error) {
