@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = text ? JSON.parse(text) : {};
 
       if (data.perfil === "professor") { 
+        localStorage.setItem('nomeUsuario', data.nome)
         window.location.href = "home/home.html";
       } 
       else if (data.perfil === "aluno") {

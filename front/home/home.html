@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,19 @@
     <link rel="stylesheet" href="home.css">
     <title>EduGrade - Painel</title>
 </head>
+
 <body>
 
     <div class="card">
+
+        <img src="/front/assets/userEduGrade.png" class="user-icon" onclick="abrirModal()">
+
         <header>
             <div class="logo">
                 <h1>Edu<span>Grade</span></h1>
             </div>
             <p>Bem-vindo ao Painel de Controle</p>
         </header>
-
         <nav class="menu">
             <a href="../nota/nota.html" class="menu-btn">
                 <i class="fi fi-br-book-alt icon"></i>
@@ -40,5 +44,54 @@
         </nav>
     </div>
 
+    <div id="modalUser" class="modal">
+        <div class="modal-content">
+            <span class="fechar" onclick="fecharModal()">x</span>
+
+            <h2>Meu Perfil</h2>
+
+            <p><strong>Nome:</strong> <span id="nomeUser"></span></p>
+            <p><strong>Tipo:</strong> <span id="tipoUser"></span></p>
+
+            <button onclick="logout()" class="btn-logout">Sair</button>
+        </div>
+    </div>
+
+    <script>
+
+        const API = window.location.hostname === "localhost"
+            ? "http://127.0.0.1:3000"
+            : "https://projetointegradorapi-back.onrender.com";
+
+        function abrirModal() {
+            const modal = document.getElementById("modalUser");
+            modal.style.display = "flex";
+
+            const nome = localStorage.getItem("nomeUsuario");
+            console.log("NOME:", nome); // 👈 TEM QUE APARECER
+
+            document.getElementById("nomeUser").innerText = nome;
+            document.getElementById("tipoUser").innerText = "Administrador";
+        }
+
+        function fecharModal() {
+            document.getElementById("modalUser").style.display = "none";
+        }
+
+        // fechar clicando fora
+        window.onclick = function (event) {
+            const modal = document.getElementById("modalUser");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "../index.html";
+        }
+
+    </script>
 </body>
+
 </html>
