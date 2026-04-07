@@ -18,20 +18,25 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!res.ok) {
-        alert("CPF ou senha inválidos");
+        const erro = await res.text();
+        console.error("Erro do backend:", erro);
+        alert("Erro no servidor");
         return;
       }
 
       const text = await res.text();
       const data = text ? JSON.parse(text) : {};
 
-      if (data.perfil === "professor") { 
+      if (data.perfil === "professor") {
         localStorage.setItem('nomeUsuario', data.nome)
+        localStorage.setItem('cpf', cpf);
         window.location.href = "home/home.html";
-      } 
+      }
       else if (data.perfil === "aluno") {
         localStorage.setItem("alunoId", data.alunoId);
         localStorage.setItem("nomeUsuario", data.nome);
+        localStorage.setItem('cpf', cpf);
+
         window.location.href = "alunoU/alunoU.html";
       }
 

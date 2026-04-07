@@ -101,7 +101,7 @@ body {
 }
 
 strong{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .user-icon {
@@ -161,7 +161,7 @@ strong{
 .media {
     display: flex;
     justify-content: space-between;
-    padding: 1px 10px;
+    padding: 5px 10px;
     font-weight: bold;
 }
 

@@ -39,7 +39,7 @@
 
     .logo span {
         color: #ffcf33;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     h2 {
@@ -87,4 +87,34 @@
 
     .btn-entrar:active {
         transform: translateY(0);
+    }
+
+    .teste {
+        position: fixed;
+        bottom: 15px;
+        text-align: center;
+        font-size: 13px;
+        color: #333;
+        opacity: 0.7;
+    }
+
+    .teste strong {
+        color: #000;
+    }
+
+    .sobre {
+    margin-top: 0;
+    display: block;
+    text-decoration: none;
+    color: #757575;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+    top: 65px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+    .sobre:hover {
+        color: #707070;
+        transform: translateY(-1px);
     }

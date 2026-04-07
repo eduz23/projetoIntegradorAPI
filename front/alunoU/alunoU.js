@@ -74,15 +74,16 @@ function abrirModal() {
     modal.style.display = "flex";
 
     const nome = localStorage.getItem("nomeUsuario");
+    const cpf = localStorage.getItem('cpf');
 
     document.getElementById("nomeUser").innerText = nome;
     document.getElementById("tipoUser").innerText = "Aluno";
+    document.getElementById('cpf').innerHTML = cpf;
 }
 
 function fecharModal() {
     document.getElementById("modalUser").style.display = "none";
 }
-
 
 window.onclick = function (event) {
     const modal = document.getElementById("modalUser");

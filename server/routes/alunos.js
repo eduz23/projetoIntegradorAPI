@@ -20,8 +20,6 @@ router.get("/", async (req, res) => {
       ORDER BY id
     `;
 
-    console.log('locallllllllllllllllllllllllllllllllllll')
-
     const result = await pool.query(query, [nome, idade, cpf]);
     res.json(result.rows);
   } catch (err) {

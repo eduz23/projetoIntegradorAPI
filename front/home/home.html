@@ -52,6 +52,7 @@
 
             <p><strong>Nome:</strong> <span id="nomeUser"></span></p>
             <p><strong>Tipo:</strong> <span id="tipoUser"></span></p>
+            <p><strong>Numero de telefone:</strong> <span id="cpf"></span></p>
 
             <button onclick="logout()" class="btn-logout">Sair</button>
         </div>
@@ -70,8 +71,11 @@
             const nome = localStorage.getItem("nomeUsuario");
             console.log("NOME:", nome); // 👈 TEM QUE APARECER
 
+            const CPF = localStorage.getItem("cpf");
+
             document.getElementById("nomeUser").innerText = nome;
             document.getElementById("tipoUser").innerText = "Administrador";
+            document.getElementById("cpf").innerText = CPF;
         }
 
         function fecharModal() {
