@@ -89,6 +89,7 @@ async function postNota() {
     });
 
     if (resposta.ok) {
+        alert('Nota salva com sucesso!')
         carregarNotas();
         document.getElementById("nota").value = "";
     }
