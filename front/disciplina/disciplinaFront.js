@@ -100,9 +100,9 @@ async function postDisciplina() {
         });
 
         if (resposta.ok) {
-            const erro = await resposta.text();
-            console.error("ERRO DO BACKEND:", erro);
-            return;
+            alert('Disciplina salva com sucesso!')
+            carregarDisciplinas();
+            document.getElementById("campoDisciplina").value = "";
         }
 
     } catch (erro) {

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!res.ok) {
         const erro = await res.text();
         console.error("Erro do backend:", erro);
-        alert("Erro no servidor");
+        alert("Login ou senha inválido");
         return;
       }
 

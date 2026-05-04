@@ -1,6 +1,6 @@
 const API = window.location.hostname === "localhost"
-  ? "http://127.0.0.1:3000/alunos"
-  : "https://projetointegradorapi-back.onrender.com/alunos";
+    ? "http://127.0.0.1:3000/alunos"
+    : "https://projetointegradorapi-back.onrender.com/alunos";
 
 // Selecionamos o corpo da tabela em vez da div
 const corpoTabela = document.getElementById("corpo-tabela");
@@ -64,6 +64,13 @@ async function postAluno() {
         if (!resposta.ok) {
             throw new Error('Erro ao inserir');
         }
+        if (resposta.ok) {
+            alert('Aluno inserido com sucesso!');
+            carregarAlunos();
+            document.getElementById('campoIdade').value = '';
+            document.getElementById('campoNome').value = '';
+            document.getElementById('campoCPF').value = '';
+        }
 
         carregarAlunos();
     }
@@ -94,12 +101,12 @@ async function deletar(id) {
 
 async function alterarJanela(id) {
     alterar.style.display = "block";
-    idEditar = id; 
+    idEditar = id;
 
     try {
 
         const resposta = await fetch(`${API}/${id}`);
-        
+
         if (!resposta.ok) {
             throw new Error("Não foi possível recuperar os dados do aluno.");
         }
@@ -112,7 +119,7 @@ async function alterarJanela(id) {
     } catch (erro) {
         console.error("Erro ao buscar aluno:", erro.message);
         alert("Erro ao carregar dados do aluno.");
-        alterar.style.display = "none"; 
+        alterar.style.display = "none";
     }
 };
 
@@ -144,7 +151,7 @@ inputBuscar.addEventListener("keyup", function () {
     const linhas = corpoTabela.getElementsByTagName("tr");
 
     for (let i = 0; i < linhas.length; i++) {
-        
+
         const colunaNome = linhas[i].getElementsByTagName("td")[0];
 
         if (colunaNome) {

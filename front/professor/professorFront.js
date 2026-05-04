@@ -56,8 +56,8 @@ async function postProfessor() {
         });
 
         if (resposta.ok) {
+            alert('Professor salvo com sucesso!')
             carregarProfessores();
-            // Limpa os campos após salvar
             document.getElementById("campoNome").value = "";
             document.getElementById("campoDisciplina").value = "";
             document.getElementById("campoTelefone").value = "";

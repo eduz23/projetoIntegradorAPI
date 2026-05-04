@@ -6,6 +6,20 @@ const API = window.location.hostname === "localhost"
 
 if (!alunoId) location.href = "../login/index.html";
 
+/* 🔥 função simples pra imagem */
+function getImagem(disciplina) {
+    if (disciplina === "Biologia") return "../assets/biologia.jpg";
+    if (disciplina === "Física") return "../assets/fisica.webp";
+    if (disciplina === "Geografia") return "../assets/geografia.png";
+    if (disciplina === "Matemática") return "../assets/matematica.jpg";
+    if (disciplina === 'História') return "../assets/historia.jpg"
+    if (disciplina === 'Português') return "../assets/portugues.jpg"
+    if (disciplina === 'Educação Física') return "../assets/educacaoFisica.webp"
+
+    else return "../assets/disciplinaDefault.jpg"
+    return "../assets/disciplinaImagem.jpg";
+}
+
 fetch(`${API}/${alunoId}`)
     .then(r => r.json())
     .then(data => {
@@ -42,6 +56,13 @@ fetch(`${API}/${alunoId}`)
 
             container.innerHTML += `
                 <div class="materia-card">
+
+                    <img src="${getImagem(materia)}" 
+                    class="imagemDisciplina 
+                    ${materia === 'História' ? 'historia-img' : ''} 
+                    ${materia === 'Educação Física' ? 'ed-fisica-img' : ''}" 
+                    alt="${materia}">
+
                     <div class="materia-header">
                         <span class="materia-nome">${materia}</span>
                     </div>
@@ -59,7 +80,6 @@ fetch(`${API}/${alunoId}`)
             `;
         });
     });
-
 
 function toggleNotas(index) {
     const lista = document.getElementById(`notas-${index}`);
