@@ -10,8 +10,7 @@ const pool = new Pool(
         ssl: {
           rejectUnauthorized: false
         },
-        family: 4 // 👈 FORÇA IPv4 (ESSENCIAL no Render)
-      
+        family: 4
       }
     : {
         host: process.env.PGHOST,
@@ -22,10 +21,9 @@ const pool = new Pool(
       }
 );
 
-console.log("🔥 DB CONFIG:1", {
+console.log("🔥 DB CONFIG:", {
   nodeEnv: process.env.NODE_ENV,
   usandoDatabaseUrl: !!process.env.DATABASE_URL
 });
-
 
 module.exports = pool;
